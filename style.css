@@ -1,0 +1,66 @@
+/* 色はCSS変数で管理（白基調＋ダークモード対応） */
+:root {
+  --bg: #ffffff; --text: #1f2933; --muted: #5f6c7b; --line: #d9e0e7;
+  --card: #f6f9fc; --accent: #2f7de1; --accent-text: #ffffff; --warn: #b3261e;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14181d; --text: #e8edf2; --muted: #a2afbd; --line: #2d3641;
+    --card: #1c222a; --accent: #5b9df0; --accent-text: #0b1118; --warn: #ff8a80;
+  }
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif; line-height: 1.8;
+}
+#app { max-width: 640px; margin: 0 auto; padding: 20px 16px 48px; outline: none; }
+h1 { font-size: 1.6rem; margin: 8px 0; }
+h2 { font-size: 1.15rem; margin: 28px 0 8px; }
+.tagline { color: var(--accent); font-weight: 700; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin: 12px 0; }
+.card h3 { margin: 0 0 4px; font-size: 1rem; }
+.muted { color: var(--muted); font-size: .9rem; }
+.error { color: var(--warn); font-weight: 700; min-height: 1.6em; }
+ul.plain { padding-left: 1.2em; margin: 8px 0; }
+
+/* ボタン */
+.btn {
+  display: block; width: 100%; padding: 14px; margin: 10px 0; font-size: 1rem; font-weight: 700;
+  border: 2px solid var(--accent); border-radius: 10px; cursor: pointer;
+  background: var(--accent); color: var(--accent-text);
+}
+.btn.secondary { background: transparent; color: var(--accent); }
+.btn:disabled { opacity: .4; cursor: not-allowed; }
+.btn:focus-visible, input:focus-visible + span { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+/* プログレスバー */
+.progress { height: 10px; background: var(--line); border-radius: 5px; overflow: hidden; }
+.progress > div { height: 100%; width: 0; background: var(--accent); transition: width .2s; }
+
+/* 質問 */
+fieldset.question { border: 1px solid var(--line); border-radius: 12px; margin: 14px 0; padding: 12px; }
+fieldset.question legend { padding: 0 6px; font-weight: 700; }
+.choices { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; margin-top: 8px; }
+.choices label { cursor: pointer; }
+.choices input { position: absolute; opacity: 0; }
+.choices span {
+  display: block; text-align: center; padding: 12px 0; border: 2px solid var(--line);
+  border-radius: 10px; font-weight: 700;
+}
+.choices input:checked + span { background: var(--accent); border-color: var(--accent); color: var(--accent-text); }
+.scale-hint { display: flex; justify-content: space-between; font-size: .78rem; color: var(--muted); margin-top: 4px; }
+
+/* 結果バー */
+.bar-row { margin: 12px 0; }
+.bar-label { display: flex; justify-content: space-between; font-size: .95rem; }
+.bar-track { height: 14px; background: var(--line); border-radius: 7px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--accent); }
+
+/* 履歴 */
+.chart-box { position: relative; height: 260px; }
+table { width: 100%; border-collapse: collapse; font-size: .85rem; }
+th, td { padding: 6px 4px; border-bottom: 1px solid var(--line); text-align: right; }
+th:first-child, td:first-child { text-align: left; }
+.table-wrap { overflow-x: auto; }
+details summary { cursor: pointer; color: var(--accent); }
